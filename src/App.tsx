@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { Home } from "./pages/home/Home";
+import NotFound from "./pages/404/NotFound";
+import { AppLayout } from "./pages/App/AppLayout";
+import Login from "./pages/login/Login";
+import AppCities from "./components/App/cities/AppCities";
+import { fetchJSON } from "./utility/api/fetchJSON";
+import type { CityType } from "./utility/types/CitiesType";
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+const BASE_URL = "http://localhost:8000";
+
+export default function App() {
+    const [cities, setCities] = useState<CityType[] | []>([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        async function fetchCities() {
+            setLoading(true);
+            try {
+                const data = await fetchJSON<CityType[]>(`${BASE_URL}/cities`);
+
+                setCities(data);
+                setLoading(false);
+            } catch (err) {
+                console.error(err);
+                setLoading(false);
+            }
+        }
+
+        fetchCities();
+    }, []);
+
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route index path="/" element={<Home />} />
+                <Route path="app" element={<AppLayout />}>
+                    <Route index element={<Navigate replace to="cities" />} />
+
+                    <Route
+                        path="cities"
+                        element={
+                            <AppCities cities={cities} loading={loading} />
+                        }
+                    />
+                    <Route path="countries" element={<h1>Countries</h1>} />
+                    <Route path="form" element={<h1>Form</h1>} />
+                </Route>
+                <Route path="login" element={<Login />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
-
-export default App

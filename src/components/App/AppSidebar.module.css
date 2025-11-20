@@ -1,0 +1,48 @@
+.sidebar {
+    position: relative;
+    width: 30%;
+    height: 100%;
+    padding: 40px 40px 80px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+
+    & footer {
+        position: absolute;
+        bottom: 40px;
+        opacity: 0.5;
+    }
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #51aaaa;
+    border-radius: 4px;
+    width: 100%;
+
+    & a {
+        padding: 7px 0px;
+        width: 50%;
+        text-align: center;
+        transition: all 0.2s;
+    }
+
+    & a:first-child {
+        border-right: 1px solid #51aaaa;
+    }
+
+    & a:hover {
+        background-color: #51aaaa;
+        color: white;
+    }
+
+    & a:global(.active) {
+        background-color: #51aaaa;
+        color: white;
+    }
+}

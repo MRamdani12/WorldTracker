@@ -1,0 +1,39 @@
+.loadContainer {
+    display: flex;
+    gap: 10px;
+    & .loadPeriod {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        background-color: var(--primary-color);
+        opacity: 0.3;
+        animation: 0.5s ease-in alternate infinite loading;
+    }
+
+    & .loadPeriod:nth-child(1) {
+        animation-delay: 0.2s;
+    }
+
+    & .loadPeriod:nth-child(2) {
+        animation-delay: 0.4s;
+    }
+
+    & .loadPeriod:nth-child(3) {
+        animation-delay: 0.6s;
+    }
+
+    & .loadPeriod:nth-child(4) {
+        animation-delay: 0.8s;
+    }
+}
+
+@keyframes loading {
+    from {
+        opacity: 0.2;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.1);
+    }
+}

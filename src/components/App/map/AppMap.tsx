@@ -8,6 +8,16 @@ import { useCitiesContext } from "../../../utility/hooks/useCitiesContext";
 import Button from "../../ui/Button";
 import { useGeolocation } from "../../../utility/hooks/useGeolocation";
 
+import iconRetina from "leaflet/dist/images/marker-icon-2x.png";
+import iconUrl from "leaflet/dist/images/marker-icon.png";
+import shadowUrl from "leaflet/dist/images/marker-shadow.png";
+
+leaflet.Icon.Default.mergeOptions({
+    iconRetinaUrl: iconRetina,
+    iconUrl: iconUrl,
+    shadowUrl: shadowUrl,
+});
+
 export default function AppMap() {
     const [mapLat, mapLng] = useUrlPosition();
     const [mapPosition, setMapPosition] = useState<LatLngTuple>([

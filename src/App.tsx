@@ -82,17 +82,16 @@ export default function App() {
                             path="login"
                             element={
                                 // I don't know why but somehow adding div outside suspense fixed the fallback not appearing... Even ChatGPT got confuse by this...
-                                <div>
-                                    <Suspense
-                                        fallback={
-                                            <LoadingFullPage>
-                                                Loading page...
-                                            </LoadingFullPage>
-                                        }
-                                    >
-                                        <Login />
-                                    </Suspense>
-                                </div>
+
+                                <Suspense
+                                    fallback={
+                                        <LoadingFullPage>
+                                            Loading page...
+                                        </LoadingFullPage>
+                                    }
+                                >
+                                    <Login />
+                                </Suspense>
                             }
                         />
 

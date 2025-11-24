@@ -7,7 +7,6 @@ export default function LoadingFullPage({
 }: {
     children: React.ReactNode;
 }) {
-    console.log("reas");
     return (
         <div className={`${styles.loading} ${styles.wide}`}>
             <LoadAnimation />

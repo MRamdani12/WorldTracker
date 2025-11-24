@@ -43,56 +43,45 @@ export default function App() {
         <AuthProvider>
             <CitiesProvider>
                 <BrowserRouter>
-                    <Suspense
-                        fallback={
-                            <LoadingFullPage>Loading page...</LoadingFullPage>
-                        }
-                    >
-                        <Routes>
-                            <Route path="/" element={<Layout />}>
-                                <Route index element={<Home />} />
+                    <Routes>
+                        <Route path="/" element={<Layout />}>
+                            <Route index element={<Home />} />
+                            <Route
+                                path="app"
+                                element={
+                                    <ProtectedRoute>
+                                        <AppLayout />
+                                    </ProtectedRoute>
+                                }
+                            >
                                 <Route
-                                    path="app"
+                                    index
+                                    element={<Navigate replace to="cities" />}
+                                />
+                                <Route
+                                    path="cities/:id"
+                                    element={<AppCity />}
+                                />
+                                <Route path="cities" element={<AppCities />} />
+                                <Route
+                                    path="countries"
+                                    element={<AppCountries />}
+                                />
+                                <Route path="form" element={<AppForm />} />
+                                <Route
+                                    path="*"
                                     element={
-                                        <ProtectedRoute>
-                                            <AppLayout />
-                                        </ProtectedRoute>
+                                        <Message className="error">
+                                            Url not found, click on the map or
+                                            the button
+                                        </Message>
                                     }
-                                >
-                                    <Route
-                                        index
-                                        element={
-                                            <Navigate replace to="cities" />
-                                        }
-                                    />
-                                    <Route
-                                        path="cities/:id"
-                                        element={<AppCity />}
-                                    />
-                                    <Route
-                                        path="cities"
-                                        element={<AppCities />}
-                                    />
-                                    <Route
-                                        path="countries"
-                                        element={<AppCountries />}
-                                    />
-                                    <Route path="form" element={<AppForm />} />
-                                    <Route
-                                        path="*"
-                                        element={
-                                            <Message className="error">
-                                                Url not found, click on the map
-                                                or the button
-                                            </Message>
-                                        }
-                                    />
-                                </Route>
-                                <Route path="login" element={<Login />} />
-                                <Route path="*" element={<NotFound />} />
+                                />
                             </Route>
-                        </Routes>
-                    </Suspense>
+                            <Route path="login" element={<Login />} />
+                            <Route path="*" element={<NotFound />} />
+                        </Route>
+                    </Routes>
                 </BrowserRouter>
             </CitiesProvider>
         </AuthProvider>

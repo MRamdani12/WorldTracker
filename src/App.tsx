@@ -81,9 +81,15 @@ export default function App() {
                         <Route
                             path="login"
                             element={
-                                // I don't know why but somehow adding div outside suspense fixed the fallback not appearing... Even ChatGPT got confuse by this...
+                                // Wrapping a div outside the suspense can fix the fallback not showing bug,
+                                // It's most likely that the Suspense doesn't get re-rendered and still using the old resolved Suspense (Homepage) everytime the url changes
+                                // And thus it keeps showing the old view before snapping to the next view immediately (Login component in this case) signing that the Suspense doesn't work at all
+                                // So giving the suspense a random key (Like crypto.randomUUID() or location.pathname in this case) make it force re-mount everytime a new Suspense shows up.
+
+                                // CMIIW
 
                                 <Suspense
+                                    key={location.pathname}
                                     fallback={
                                         <LoadingFullPage>
                                             Loading page...
@@ -98,17 +104,16 @@ export default function App() {
                         <Route
                             path="*"
                             element={
-                                <div>
-                                    <Suspense
-                                        fallback={
-                                            <LoadingFullPage>
-                                                Loading page...
-                                            </LoadingFullPage>
-                                        }
-                                    >
-                                        <NotFound />
-                                    </Suspense>
-                                </div>
+                                <Suspense
+                                    key={location.pathname}
+                                    fallback={
+                                        <LoadingFullPage>
+                                            Loading page...
+                                        </LoadingFullPage>
+                                    }
+                                >
+                                    <NotFound />
+                                </Suspense>
                             }
                         />
                     </Routes>

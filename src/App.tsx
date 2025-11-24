@@ -81,30 +81,35 @@ export default function App() {
                         <Route
                             path="login"
                             element={
-                                <Suspense
-                                    fallback={
-                                        <LoadingFullPage>
-                                            Loading page...
-                                        </LoadingFullPage>
-                                    }
-                                >
-                                    <Login />
-                                </Suspense>
+                                // I don't know why but somehow adding div outside suspense fixed the fallback not appearing... Even ChatGPT got confuse by this...
+                                <div>
+                                    <Suspense
+                                        fallback={
+                                            <LoadingFullPage>
+                                                Loading page...
+                                            </LoadingFullPage>
+                                        }
+                                    >
+                                        <Login />
+                                    </Suspense>
+                                </div>
                             }
                         />
 
                         <Route
                             path="*"
                             element={
-                                <Suspense
-                                    fallback={
-                                        <LoadingFullPage>
-                                            Loading page...
-                                        </LoadingFullPage>
-                                    }
-                                >
-                                    <NotFound />
-                                </Suspense>
+                                <div>
+                                    <Suspense
+                                        fallback={
+                                            <LoadingFullPage>
+                                                Loading page...
+                                            </LoadingFullPage>
+                                        }
+                                    >
+                                        <NotFound />
+                                    </Suspense>
+                                </div>
                             }
                         />
                     </Routes>

@@ -7,6 +7,8 @@ import styles from "./AppCountries.module.css";
 
 export default function AppCountries() {
     const { cities, loading } = useCitiesContext();
+
+    // This code return a unique country from the cities state
     const uniqueCountry = Array.from(
         new Map(cities.map((c) => [c.countryCode, { ...c }])).values()
     );

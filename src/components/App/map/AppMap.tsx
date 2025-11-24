@@ -78,8 +78,8 @@ export default function AppMap() {
     // Move map position according to mapPosition
     useEffect(() => {
         if (!mapRef.current) return;
-        // check if a click is coming from inside the map. If not, just set the view to mapPosition state
 
+        // check if a click is coming from inside the map. If not, just set the view to mapPosition state instead of using useNavigate hook.
         mapRef.current.setView(mapPosition);
 
         if (clickInsideMap.current) {
@@ -98,6 +98,7 @@ export default function AppMap() {
             const lat = e.latlng.lat;
             const lng = e.latlng.lng;
 
+            // set the map position to button click position and also mark the click as inside the map.
             setMapPosition([lat, lng]);
             clickInsideMap.current = true;
         }

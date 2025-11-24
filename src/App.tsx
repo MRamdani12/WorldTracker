@@ -1,4 +1,11 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+    BrowserRouter,
+    Navigate,
+    Outlet,
+    Route,
+    Routes,
+    useLocation,
+} from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import AppCities from "./components/App/cities/AppCities";
@@ -18,6 +25,19 @@ const NotFound = lazy(() => import("./pages/404/NotFound"));
 const AppLayout = lazy(() => import("./pages/App/AppLayout"));
 const Login = lazy(() => import("./pages/login/Login"));
 
+function Layout() {
+    const location = useLocation();
+
+    return (
+        <Suspense
+            fallback={<LoadingFullPage>Loading page...</LoadingFullPage>}
+            key={location.pathname}
+        >
+            <Outlet />
+        </Suspense>
+    );
+}
+
 export default function App() {
     return (
         <AuthProvider>
@@ -29,41 +49,48 @@ export default function App() {
                         }
                     >
                         <Routes>
-                            <Route index path="/" element={<Home />} />
-                            <Route
-                                path="app"
-                                element={
-                                    <ProtectedRoute>
-                                        <AppLayout />
-                                    </ProtectedRoute>
-                                }
-                            >
+                            <Route path="/" element={<Layout />}>
+                                <Route index element={<Home />} />
                                 <Route
-                                    index
-                                    element={<Navigate replace to="cities" />}
-                                />
-                                <Route
-                                    path="cities/:id"
-                                    element={<AppCity />}
-                                />
-                                <Route path="cities" element={<AppCities />} />
-                                <Route
-                                    path="countries"
-                                    element={<AppCountries />}
-                                />
-                                <Route path="form" element={<AppForm />} />
-                                <Route
-                                    path="*"
+                                    path="app"
                                     element={
-                                        <Message className="error">
-                                            Url not found, click on the map or
-                                            the button
-                                        </Message>
+                                        <ProtectedRoute>
+                                            <AppLayout />
+                                        </ProtectedRoute>
                                     }
-                                />
+                                >
+                                    <Route
+                                        index
+                                        element={
+                                            <Navigate replace to="cities" />
+                                        }
+                                    />
+                                    <Route
+                                        path="cities/:id"
+                                        element={<AppCity />}
+                                    />
+                                    <Route
+                                        path="cities"
+                                        element={<AppCities />}
+                                    />
+                                    <Route
+                                        path="countries"
+                                        element={<AppCountries />}
+                                    />
+                                    <Route path="form" element={<AppForm />} />
+                                    <Route
+                                        path="*"
+                                        element={
+                                            <Message className="error">
+                                                Url not found, click on the map
+                                                or the button
+                                            </Message>
+                                        }
+                                    />
+                                </Route>
+                                <Route path="login" element={<Login />} />
+                                <Route path="*" element={<NotFound />} />
                             </Route>
-                            <Route path="login" element={<Login />} />
-                            <Route path="*" element={<NotFound />} />
                         </Routes>
                     </Suspense>
                 </BrowserRouter>

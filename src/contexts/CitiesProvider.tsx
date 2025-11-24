@@ -1,9 +1,9 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useReducer } from "react";
 
 // import { fetchJSON } from "../utility/api/fetchJSON";
 import type { CityType } from "../utility/types/CitiesType";
 import type { CitiesActionType } from "../utility/types/CitiesActionType";
-import LoadingFullPage from "../components/ui/LoadingFullPage";
+// import LoadingFullPage from "../components/ui/LoadingFullPage";
 
 // Creating the necessary types
 type CitiesContextType = {
@@ -74,23 +74,23 @@ export function CitiesProvider({ children }: { children: React.ReactNode }) {
         initialState
     );
 
-    const [pageLoading, setPageLoading] = useState(true);
+    // const [pageLoading, setPageLoading] = useState(true);
 
-    useEffect(() => {
-        function handlePageLoad() {
-            setPageLoading(false);
-        }
+    // useEffect(() => {
+    //     function handlePageLoad() {
+    //         setPageLoading(false);
+    //     }
 
-        if (document.readyState === "complete") {
-            setPageLoading(false);
-        } else {
-            window.addEventListener("load", handlePageLoad);
+    //     if (document.readyState === "complete") {
+    //         setPageLoading(false);
+    //     } else {
+    //         window.addEventListener("load", handlePageLoad);
 
-            return () => {
-                window.removeEventListener("load", handlePageLoad);
-            };
-        }
-    }, []);
+    //         return () => {
+    //             window.removeEventListener("load", handlePageLoad);
+    //         };
+    //     }
+    // }, []);
 
     // Uncomment the code below if you want to use json-server for the fake API
 
@@ -162,7 +162,7 @@ export function CitiesProvider({ children }: { children: React.ReactNode }) {
         dispatch({ type: "clearError" });
     }
 
-    if (pageLoading) return <LoadingFullPage>Loading page...</LoadingFullPage>;
+    // if (pageLoading) return <LoadingFullPage>Loading page...</LoadingFullPage>;
 
     return (
         <CitiesContext.Provider

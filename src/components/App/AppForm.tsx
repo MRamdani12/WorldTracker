@@ -78,8 +78,6 @@ export default function AppForm() {
                         import.meta.env.VITE_BIGDATACLOUD_API_KEY
                     }`
                 );
-
-                console.log(data);
                 dispatch({ type: "state/updated", payload: data });
             } catch (err) {
                 console.error(err);

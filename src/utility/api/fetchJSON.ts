@@ -1,3 +1,5 @@
+// Small utility function to fetch data from json and make sure the data type is of type <T>
+
 export async function fetchJSON<T>(
     ...args: Parameters<typeof fetch>
 ): Promise<T> {

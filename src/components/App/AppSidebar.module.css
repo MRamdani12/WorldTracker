@@ -8,12 +8,20 @@
     justify-content: start;
     align-items: center;
     gap: 40px;
+    overflow: hidden;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
 
     & footer {
         position: absolute;
         bottom: 40px;
         opacity: 0.5;
+    }
+
+    & .sidebarBg {
+        bottom: -260%;
+        left: -100%;
+        transform: rotateZ(20deg);
+        opacity: 0.2;
     }
 }
 

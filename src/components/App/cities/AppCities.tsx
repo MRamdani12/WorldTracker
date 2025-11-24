@@ -1,26 +1,26 @@
-import type { CityType } from "../../../utility/types/CitiesType";
 import Loading from "../../ui/Loading";
 import AppCityList from "./AppCityList";
 
 import styles from "./AppCities.module.css";
+import { useCitiesContext } from "../../../utility/hooks/useCitiesContext";
+import Message from "../../ui/Message";
 
-type AppCitiesProps = {
-    cities: CityType[];
-    loading: boolean;
-};
+export default function AppCities() {
+    const { cities, loading } = useCitiesContext();
 
-export default function AppCities({ cities, loading = true }: AppCitiesProps) {
+    if (loading) {
+        return <Loading />;
+    }
+
+    if (!cities.length) {
+        return <Message>Click on the map to start your journey!</Message>;
+    }
+
     return (
-        <>
-            {loading ? (
-                <Loading />
-            ) : (
-                <ul className={styles.list}>
-                    {cities.map((c) => {
-                        return <AppCityList key={c.id} city={c} />;
-                    })}
-                </ul>
-            )}
-        </>
+        <ul className={styles.list}>
+            {cities.map((c) => {
+                return <AppCityList key={c.id} city={c} />;
+            })}
+        </ul>
     );
 }

@@ -1,3 +1,6 @@
+import { useCitiesContext } from "../../../utility/hooks/useCitiesContext";
+
+import { Link } from "react-router-dom";
 import type { CityType } from "../../../utility/types/CitiesType";
 import styles from "./AppCityList.module.css";
 
@@ -5,26 +8,66 @@ type AppCityListProps = {
     city: CityType;
 };
 
+const options: Intl.DateTimeFormatOptions = {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+};
+
 export default function AppCityList({ city }: AppCityListProps) {
-    const date = new Date(city.date).toLocaleString();
+    const { currentCity, getCity, deleteCity } = useCitiesContext();
+
+    const date = new Date(city.date).toLocaleDateString("en-GB", options);
 
     return (
-        <li className={styles.cityList}>
-            <div className={styles.country}>
-                <div className={styles.flagWrapper}>
-                    <img
-                        className={styles.flag}
-                        alt={city.countryCode}
-                        src={`https://flagservice.net/${city.countryCode}/flag.svg`}
-                    />
-                </div>
+        <Link
+            to={`${city.id}?lat=${city.position.lat}&lng=${city.position.lng}`}
+            onClick={() => getCity(city.id)}
+            className={styles.cityLink}
+        >
+            <li
+                className={`${styles.cityList} ${
+                    city === currentCity ? styles.active : ""
+                }`}
+            >
+                <div className={styles.country}>
+                    <div className={styles.flagWrapper}>
+                        <img
+                            className={styles.flag}
+                            alt={city.countryCode}
+                            src={`https://flagservice.net/${city.countryCode}/flag.svg`}
+                        />
+                    </div>
 
-                <p>{city.cityName}</p>
-            </div>
-            <div className={styles.date}>
-                <p className="date">({date})</p>
-                <div className="closeButton">x</div>
-            </div>
-        </li>
+                    <p>{city.cityName}</p>
+                </div>
+                <div className={styles.date}>
+                    <p className="date">{date}</p>
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            deleteCity(city.id);
+                        }}
+                        className={styles.closeButton}
+                    >
+                        <svg
+                            width="100%"
+                            height="100%"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <rect width="16" height="16" rx="8" fill="white" />
+                            <path
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M16 8C16 12.4182 12.4182 16 8 16C3.58172 16 0 12.4182 0 8C0 3.58172 3.58172 0 8 0C12.4182 0 16 3.58172 16 8ZM5.5757 5.57572C5.81002 5.34141 6.18991 5.34141 6.42424 5.57572L8 7.15144L9.57568 5.57574C9.81 5.34142 10.1899 5.34142 10.4242 5.57574C10.6586 5.81005 10.6586 6.18995 10.4242 6.42424L8.84848 8L10.4242 9.57568C10.6586 9.81 10.6586 10.1899 10.4242 10.4242C10.1899 10.6586 9.81 10.6586 9.57568 10.4242L8 8.84856L6.42424 10.4242C6.18994 10.6586 5.81003 10.6586 5.57572 10.4242C5.34141 10.1899 5.34141 9.81 5.57572 9.57576L7.15144 8L5.5757 6.42424C5.34138 6.18994 5.34138 5.81003 5.5757 5.57572Z"
+                                fill="currentColor"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </li>
+        </Link>
     );
 }

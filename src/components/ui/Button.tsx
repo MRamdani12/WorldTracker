@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 
 type ButtonProps = {
     children: React.ReactNode;
-    className?: string;
+    className?: "primary" | "secondary" | "secondaryWithBg";
     url?: string;
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
@@ -11,18 +11,28 @@ type ButtonProps = {
 export default function Button({
     children,
     className = "primary",
-    url = "/",
+    url,
     onClick,
 }: ButtonProps) {
     return (
-        <Link to={`${url}`}>
-            {" "}
-            <button
-                onClick={onClick}
-                className={`${styles.button} ${styles[className]}`}
-            >
-                {children}
-            </button>
-        </Link>
+        <>
+            {url ? (
+                <Link to={`${url}`}>
+                    <button
+                        onClick={onClick}
+                        className={`${styles.button} ${styles[className]}`}
+                    >
+                        {children}
+                    </button>{" "}
+                </Link>
+            ) : (
+                <button
+                    onClick={onClick}
+                    className={`${styles.button} ${styles[className]}`}
+                >
+                    {children}
+                </button>
+            )}
+        </>
     );
 }

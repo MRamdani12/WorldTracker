@@ -3,18 +3,34 @@ import africa from "../../assets/africa.svg";
 import smallMap from "../../assets/smallmap.svg";
 import styles from "./Background.module.css";
 
-export function BackgroundGrid() {
-    return <img className={styles.backgroundGrid} src={grid} alt="grid" />;
-}
+type BackgroundProps = {
+    className?: string;
+};
 
-export function BackgroundMap() {
-    return <img className={styles.backgroundMap} src={africa} alt="africa" />;
-}
-
-export function BackgroundMapSmall() {
+export function BackgroundGrid({ className }: BackgroundProps) {
     return (
         <img
-            className={styles.backgroundMapSmall}
+            className={`${styles.backgroundGrid} ${className}`}
+            src={grid}
+            alt="grid"
+        />
+    );
+}
+
+export function BackgroundMap({ className }: BackgroundProps) {
+    return (
+        <img
+            className={`${styles.backgroundMap} ${className}`}
+            src={africa}
+            alt="africa"
+        />
+    );
+}
+
+export function BackgroundMapSmall({ className }: BackgroundProps) {
+    return (
+        <img
+            className={`${styles.backgroundMapSmall} ${className}`}
             src={smallMap}
             alt="africa"
         />

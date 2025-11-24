@@ -1,52 +1,52 @@
 {
-    "cities": [
-        {
-            "cityName": "Lisbon",
-            "country": "Portugal",
-            "countryCode": "pt",
-            "date": "2027-10-31T15:59:59.138Z",
-            "notes": "My favorite city so far!",
-            "position": {
-                "lat": 38.727881642324164,
-                "lng": -9.140900099907554
-            },
-            "id": 73930385
-        },
-        {
-            "cityName": "Madrid",
-            "country": "Spain",
-            "countryCode": "es",
-            "date": "2027-07-15T08:22:53.976Z",
-            "notes": "",
-            "position": {
-                "lat": 40.46635901755316,
-                "lng": -3.7133789062500004
-            },
-            "id": 17806751
-        },
-        {
-            "cityName": "Berlin",
-            "country": "Germany",
-            "countryCode": "de",
-            "date": "2027-02-12T09:24:11.863Z",
-            "notes": "Amazing 😃",
-            "position": {
-                "lat": 52.53586782505711,
-                "lng": 13.376933665713324
-            },
-            "id": 98443197
-        },
-        {
-            "cityName": "Nijar",
-            "country": "Spain",
-            "countryCode": "es",
-            "date": "2023-04-03T07:47:59.202Z",
-            "notes": "",
-            "position": {
-                "lat": "36.967508314568164",
-                "lng": "-2.13128394200588"
-            },
-            "id": 98443198
-        }
-    ]
+  "cities": [
+    {
+      "cityName": "Koto Besar",
+      "country": "Indonesia",
+      "countryCode": "ID",
+      "date": "2025-11-22",
+      "notes": "",
+      "position": {
+        "lat": -1.1425024037061522,
+        "lng": 101.55761718750001
+      },
+      "id": "bf1dd203-21c0-4f34-9e0b-0140cb873991"
+    },
+    {
+      "cityName": "Kecamatan Lubai",
+      "country": "Indonesia",
+      "countryCode": "ID",
+      "date": "2025-11-22",
+      "notes": "",
+      "position": {
+        "lat": -3.7327083213358336,
+        "lng": 104.37011718750001
+      },
+      "id": "5c3c82d2-f895-431d-9e42-2374a00d8934"
+    },
+    {
+      "cityName": "Jakarta",
+      "country": "Indonesia",
+      "countryCode": "ID",
+      "date": "2025-11-23",
+      "notes": "",
+      "position": {
+        "lat": -6.2291968,
+        "lng": 106.807296
+      },
+      "id": "e60835dd-0b7a-4c59-9824-e3fddc7e4a6c"
+    },
+    {
+      "cityName": "Bojonggede",
+      "country": "Indonesia",
+      "countryCode": "ID",
+      "date": "2025-11-24",
+      "notes": "",
+      "position": {
+        "lat": -6.4983546192296675,
+        "lng": 106.76788984886754
+      },
+      "id": "2672a5f2-9582-43e5-9b87-de4654eeea4e"
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-.cityList {
+.countryList {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -8,20 +8,9 @@
     border-radius: 4px;
     transition: all 0.2s;
     cursor: pointer;
-
-    &:hover {
-        background-color: var(--primary-color);
-        color: white;
-    }
-}
-
-.cityList.active {
     background-color: var(--primary-color);
     color: white;
-}
-
-.cityLink {
-    width: 100%;
+    cursor: default;
 }
 
 .country,
@@ -44,23 +33,5 @@
 
     & .flag {
         width: 25px;
-    }
-}
-
-.closeButton {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--warn);
-    transition: color 0.2s;
-    border: none;
-    background-color: transparent;
-    box-shadow: none;
-    cursor: pointer;
-
-    &:hover {
-        color: #aa0000;
     }
 }

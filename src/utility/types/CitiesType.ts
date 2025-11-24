@@ -8,5 +8,5 @@ export type CityType = {
         lat: number;
         lng: number;
     };
-    id: number;
+    id: number | string;
 };

@@ -4,7 +4,7 @@ import bgVideo from "../../assets/background-video.mp4";
 
 import styles from "./Home.module.css";
 
-export function Home() {
+export default function Home() {
     return (
         <>
             <Navigation />
